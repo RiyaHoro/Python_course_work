@@ -4,20 +4,15 @@ import matplotlib.pyplot as plt
 
 def generate_logistic_data(theta, n, m):
 
-    # Generate m continuous independent variables
+    
     X_variables = np.random.randn(n, m)
 
-    # Add a column of 1s for the intercept
     ones = np.ones((n, 1))
     X = np.hstack((ones, X_variables))
-
-    # Generate random coefficients
     beta = np.random.randn(m + 1)
 
-    # Calculate X · beta
     linear_output = X @ beta
 
-    # Apply sigmoid function
     probability = 1 / (1 + np.exp(-linear_output))
 
     # Generate binary labels
@@ -35,10 +30,6 @@ def generate_logistic_data(theta, n, m):
     return X, Y, beta
 
 
-# ---------------------------------------------------------
-# Sigmoid function
-# ---------------------------------------------------------
-
 def sigmoid(z):
 
     # Prevent overflow in exp()
@@ -46,10 +37,6 @@ def sigmoid(z):
 
     return 1 / (1 + np.exp(-z))
 
-
-# ---------------------------------------------------------
-# Logistic regression with L1 / L2 regularization
-# ---------------------------------------------------------
 
 def logistic_regression(X, Y, learning_rate, iterations,
                         regularization_type=None, lambda_value=0):
@@ -95,10 +82,6 @@ def logistic_regression(X, Y, learning_rate, iterations,
     return beta
 
 
-# ---------------------------------------------------------
-# Calculate logistic regression cost
-# ---------------------------------------------------------
-
 def calculate_cost(X, Y, beta, regularization_type=None,
                    lambda_value=0):
 
@@ -133,15 +116,8 @@ def calculate_cost(X, Y, beta, regularization_type=None,
     return cost
 
 
-# ---------------------------------------------------------
-# Main
-# ---------------------------------------------------------
 
 if __name__ == "__main__":
-
-    # -----------------------------------------------------
-    # Generate data
-    # -----------------------------------------------------
 
     theta = 0.1
     n = 100
@@ -152,27 +128,16 @@ if __name__ == "__main__":
     print("True Beta used to generate the data:")
     print(true_beta)
 
-    # -----------------------------------------------------
-    # Parameters for logistic regression
-    # -----------------------------------------------------
-
     learning_rate = 0.1
     iterations = 5000
 
-    # Different regularization constants
     lambda_values = [0, 0.01, 0.1, 1, 10, 100]
 
-    # -----------------------------------------------------
-    # Store beta values
-    # -----------------------------------------------------
 
     l1_betas = []
     l2_betas = []
 
-    # -----------------------------------------------------
-    # Train models using different lambda values
-    # -----------------------------------------------------
-
+    
     for lambda_value in lambda_values:
 
         # L1 model
@@ -202,9 +167,7 @@ if __name__ == "__main__":
     l1_betas = np.array(l1_betas)
     l2_betas = np.array(l2_betas)
 
-    # -----------------------------------------------------
-    # Print learned beta vectors
-    # -----------------------------------------------------
+   
 
     print("\n" + "=" * 60)
     print("L1 REGULARIZATION")
@@ -228,9 +191,7 @@ if __name__ == "__main__":
             f"Beta = {l2_betas[i]}"
         )
 
-    # -----------------------------------------------------
-    # Calculate and print costs
-    # -----------------------------------------------------
+   
 
     print("\n" + "=" * 60)
     print("COST VALUES")
@@ -263,9 +224,7 @@ if __name__ == "__main__":
             f"L2 Cost = {cost_l2:.4f}"
         )
 
-    # -----------------------------------------------------
-    # Graph 1: L1 regularization
-    # -----------------------------------------------------
+    
 
     plt.figure(figsize=(9, 6))
 
@@ -301,9 +260,7 @@ if __name__ == "__main__":
 
     plt.show()
 
-    # -----------------------------------------------------
-    # Graph 2: L2 regularization
-    # -----------------------------------------------------
+    
 
     plt.figure(figsize=(9, 6))
 
@@ -339,9 +296,7 @@ if __name__ == "__main__":
 
     plt.show()
 
-    # -----------------------------------------------------
-    # Graph 3: Compare L1 and L2 coefficient magnitudes
-    # -----------------------------------------------------
+    
 
     l1_magnitude = np.linalg.norm(l1_betas[:, 1:], axis=1)
     l2_magnitude = np.linalg.norm(l2_betas[:, 1:], axis=1)

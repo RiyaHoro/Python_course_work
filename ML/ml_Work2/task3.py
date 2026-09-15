@@ -6,12 +6,10 @@ def logistic_regression_gd(X, Y, k, tau, learning_rate):
 
     Y = np.asarray(Y).reshape(-1)
 
-    # Add intercept column
     X = np.column_stack((np.ones(X.shape[0]), X))
 
     n = X.shape[0]
 
-    # Random initialization of beta
     beta = np.random.randn(X.shape[1])
 
     previous_cost = float("inf")
