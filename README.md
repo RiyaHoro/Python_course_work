@@ -1,2 +1,2 @@
-## Internship Course Work
-# This repository contains the internship related files like course work for every course, including nlp , ml , sql etc.
+### Internship Course Work
+##This repository contains the internship related files like course work for every course, including nlp , ml , sql etc.
